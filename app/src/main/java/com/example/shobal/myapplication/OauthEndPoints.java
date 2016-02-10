@@ -1,7 +1,7 @@
 package com.example.shobal.myapplication;
 
 public class OauthEndPoints {
-	private String transportProtocol = "http://";
+	private String transportProtocol = "https://";
 	private String authorizeURL;
 	private String accessTokenURL;
 	private String redirectURL;

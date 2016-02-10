@@ -47,9 +47,11 @@ public class WebViewActivity extends Activity {
 		setContentView(R.layout.webview);
 		oauthEndPoints = OauthEndPoints.getInstance();
 		SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-		String host = sharedPreferences.getString("edittext_preference_host", "10.100.5.3");//read host from configurations
+//		String host = sharedPreferences.getString("edittext_preference_host", "10.100.5.3");//read host from configurations
+		String host  = "172.31.210.44";
 		Log.d("Host", host);
-		String port = sharedPreferences.getString("edittext_preference_port", "9763");//read port from configurations 
+//		String port = sharedPreferences.getString("edittext_preference_port", "9763");//read port from configurations
+		String port = "9443";
 		Log.d("Port", port);
 		oauthEndPoints.setEndPointURLs(host, port);//set port & host	
 		
@@ -64,7 +66,7 @@ public class WebViewActivity extends Activity {
 		} else if (clientID == null && selfLogin != null) {//MainActivity launch WebView activity after doing configurations like host, port and profile picture at this point self_login has some String value and client ID is null.   
 			Log.d(OauthCostants.INFO, "Recived Client ID, Redirect URL from IDP Proxy Application");
 			clientID = OauthCostants.CLIENT_ID;//set client ID of IDP proxy application
-			showImage();
+			//showImage();
 			loadWebView();
 		} else if(clientID == null && selfLogin == null) {//first time launch of IDP proxy application so both client ID and selfLogin are null.
 			Intent entry = new Intent(this, MainActivity.class);
@@ -96,7 +98,7 @@ public class WebViewActivity extends Activity {
 		switch (item.getItemId()) {
 			case R.id.action_settings:
 				Log.v("Menu Clicked", "Menu Setting Clicked");
-				Intent intent = new Intent(this, Configuration.class);
+				Intent intent = new Intent(WebViewActivity.this, Configuration.class);
 				startActivity(intent);
 				break;
 		}

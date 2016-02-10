@@ -1,6 +1,6 @@
 package com.example.shobal.myapplication;
 
-import android.content.res.Configuration;
+import android.support.annotation.MainThread;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
@@ -43,26 +43,8 @@ public class MainActivity extends Activity{
                 Intent i = new Intent(MainActivity.this, WebViewActivity.class);
                 i.putExtra("self_login", "self_login");
                 startActivity(i);
-                finish();
             }
 
-        });
-        Button imageUploadButton = (Button) findViewById(R.id.btnUploadImage);//button to upload profile picture
-        imageUploadButton.setOnClickListener(new OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-
-                Intent intent = new Intent(getBaseContext(), FileDialog.class);
-                intent.putExtra(FileDialog.START_PATH, "/sdcard");
-                intent.putExtra(FileDialog.CAN_SELECT_DIR, true);
-                intent.putExtra(FileDialog.FORMAT_FILTER, new String[] { "jpg" });
-                try {
-                    startActivityForResult(intent, 23);//launch FileDialog activity to select a image from SD card
-                } catch (NullPointerException e) {
-                    Log.d(TAG, e.toString());
-                }
-            }
         });
     }
     /*
@@ -81,45 +63,15 @@ public class MainActivity extends Activity{
      */
     @Override
     public boolean onMenuItemSelected(int featureId, MenuItem item) {
+
         switch (item.getItemId()) {
             case R.id.action_settings:
-                Log.d(TAG, "Menu Setting Clicked");
-                Intent intent = new Intent(this, Configuration.class);
+                Log.v("Menu Clicked", "Menu Setting Clicked");
+                Intent intent = new Intent(MainActivity.this, Configuration.class);
                 startActivity(intent);
                 break;
         }
         return super.onMenuItemSelected(featureId, item);
     }
-    /* Save captured image from SD card to application private data
-     * (non-Javadoc)
-     * @see android.app.Activity#onActivityResult(int, int, android.content.Intent)
-     */
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == 23) {
-            Log.d(TAG, "Saving...");
-            try {
-                String filePath = data.getStringExtra(FileDialog.RESULT_PATH);
-                File file = new File(filePath);
-                Log.v("File Selected", filePath);
-                fis = new FileInputStream(file);
-                imageFileSize = (int) file.length();
-                byte[] fileArray = new byte[imageFileSize];
-                fis.read(fileArray);
-                FileOutputStream outputStream =
-                        openFileOutput("profile_pic.png",
-                                Context.MODE_PRIVATE);
-                outputStream.write(fileArray);
-                outputStream.flush();
-                outputStream.close();
-                super.onActivityResult(requestCode, resultCode, data);
-            } catch (FileNotFoundException e) {
-                Log.d(TAG, e.toString());
-            } catch (Exception e) {
-                Log.d(TAG, e.toString());
-            }
-        }
-    }
-
 }
 

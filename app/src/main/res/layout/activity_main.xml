@@ -16,14 +16,4 @@
         android:layout_alignParentTop="true"
         android:text="Login" />
 
-    <Button
-        android:id="@+id/btnUploadImage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/btnLogin"
-        android:layout_alignRight="@+id/btnLogin"
-        android:layout_below="@+id/btnLogin"
-        android:layout_marginTop="18dp"
-        android:text="Upload Profile Image" />
-
 </RelativeLayout>

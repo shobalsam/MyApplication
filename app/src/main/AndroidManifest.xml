@@ -18,10 +18,12 @@
 
         <activity
             android:name=".WebViewActivity"
+            android:label="WebViewActivity"
             android:theme="@style/AppTheme" >
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
+                <action android:name="com.example.shobal.myapplication.WebViewActivity" />
+
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
 
         </activity>
@@ -29,13 +31,14 @@
         <activity
             android:name=".Configuration"
             android:label="@string/title_activity_configuration" >
-        </activity>
-        <activity
-            android:name=".FileDialog"
-            android:label="@string/title_activity_configuration" >
+            <intent-filter>
+                <action android:name="com.example.shobal.myapplication.Configuration" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
         </activity>
 
 
     </application>
-
+    <uses-permission android:name="android.permission.INTERNET" />
 </manifest>
